@@ -1,10 +1,15 @@
 
-import MapView from './components/mapView/MapView';
+import GlobalStats from './components/globalView/GlobalStats';
+import MapData from './components/globalView/MapData';
 import './App.css';
 
 function App() {
-    return (    
-        <MapView/>
+    return (
+        <div>
+            <GlobalStats />
+            <MapData />
+        </div>
+
     )
 }
 
