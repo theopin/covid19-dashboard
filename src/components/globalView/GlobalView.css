@@ -1,0 +1,15 @@
+.container {
+    display: flex;
+    padding: 5px;
+}
+
+.container>* {
+    margin: 0 10px;
+    flex: 1;
+}
+
+.card {
+    border-radius: 5px;
+    border: 1px solid black;
+    text-align: center;
+  }
