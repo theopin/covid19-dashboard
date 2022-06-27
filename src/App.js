@@ -1,10 +1,10 @@
 
-import MapView from './components/mapView/MapView';
+import MapData from './components/globalView/MapData';
 import './App.css';
 
 function App() {
     return (    
-        <MapView/>
+        <MapData/>
     )
 }
 
