@@ -20,7 +20,8 @@ class MapData extends Component {
 
     const CountryMarkers = ({ countries }) => {
       return countries.map(country => {
-        if(!country.countryInfo._id) return 
+        console.log(new Date(country.updated).toLocaleString())
+        if(!country.countryInfo._id) return null
         return (
           <Marker position={[country.countryInfo.lat, country.countryInfo.long]} key={country.countryInfo._id} >
             <Popup>
