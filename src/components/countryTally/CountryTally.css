@@ -1,27 +1,27 @@
-
-
 .card {
-    padding:10px;
+    padding: 10px;
     border-radius: 5px;
     border: 1px solid black;
-    text-align: center;
+    text-align: center; 
+    overflow: auto;
 }
 
 table {
-border-collapse: collapse;
-width: 100%;
-height: 250px;
+    border-collapse: collapse;
+    width: 100%;
 }
 
-th, td {
-    overflow:auto;
-text-align: left;
-border-bottom: 1px solid #ddd;
+th,
+td {
+    text-align: left;
+    border-bottom: 1px solid #ddd;
 }
 
-tr:hover {background-color: coral;}
+tr:hover {
+    background-color: coral;
+}
 
 .flag {
     width: 20%;
-    height: 20%;
+    height: 10%;
 }

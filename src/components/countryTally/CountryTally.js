@@ -19,9 +19,7 @@ class CountryTally extends Component {
   }
 
   render() {
-    console.log(10101)
     const CountryTallyRows = ({ countries }) => {
-      console.log(countries)
       return countries.map(country => {
         if (!country.countryInfo._id) return null
         return (
