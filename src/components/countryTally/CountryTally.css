@@ -1,34 +1,42 @@
-.container-table {
-    padding: 10px;
-    text-align: center; 
-    overflow: auto;
+.container-country {
+    display: flex;
+    flex-direction: column;
 }
+
+.container-table {
+    flex-grow: 1;
+    overflow: auto;
+    border-radius: 5px;
+    border: 1px solid black;
+}
+
 
 /* width */
 ::-webkit-scrollbar {
     width: 10px;
-  }
-  
-  /* Track */
-  ::-webkit-scrollbar-track {
+}
+
+/* Track */
+::-webkit-scrollbar-track {
     border-top-right-radius: 1px;
     border-bottom-right-radius: 1px;
     background: #f1f1f1;
-  }
-  
-  /* Handle */
-  ::-webkit-scrollbar-thumb {
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
     background: #888;
-  }
-  
-  /* Handle on hover */
-  ::-webkit-scrollbar-thumb:hover {
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
     background: #555;
-  }
+}
 
 table {
     border-collapse: collapse;
     width: 100%;
+    height: 100%;
     overflow: auto;
 }
 
@@ -43,6 +51,6 @@ tr:hover {
 }
 
 .flag {
-    width: 20%;
-    height: 10%;
+    width: 50px;
+    height: 25px;
 }

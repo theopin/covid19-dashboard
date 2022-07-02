@@ -36,11 +36,13 @@ class CountryTally extends Component {
     }
 
     return (
-      <div className="container-table">
+      <div className='container-country'>
         <div>Hi</div>
+        <div className='container-table'>
         <table>
           <CountryTallyRows countries={this.state.countryTally} />
         </table>
+        </div>
       </div>
     );
   }
