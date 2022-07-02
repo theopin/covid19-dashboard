@@ -36,7 +36,7 @@ class CountryTally extends Component {
     }
 
     return (
-      <div class="card">
+      <div class="card" >
         <table>
           <CountryTallyRows countries={this.state.countryTally} />
         </table>
