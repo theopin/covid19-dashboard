@@ -12,8 +12,6 @@ class GlobalStats extends Component {
   async componentDidMount() {
     const globalCases = await axios.get('https://disease.sh/v3/covid-19/all')
     const globalVaccinations = await axios.get('https://disease.sh/v3/covid-19/vaccine/coverage?lastdays=1&fullData=false')
-    console.log(globalCases) 
-    console.log(globalVaccinations) 
     this.setState({
       globalCases: globalCases.data,
       globalVaccinations: Object.values(globalVaccinations.data)[0]
