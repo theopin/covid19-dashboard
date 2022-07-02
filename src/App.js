@@ -8,7 +8,7 @@ function App() {
     return (
         <div>
             <GlobalStats />
-            <div class="container">
+            <div className="container">
             <CountryTally />
             <MapData />
             </div>

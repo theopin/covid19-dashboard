@@ -1,5 +1,16 @@
-.card {
-    border-radius: 5px;
-    border: 1px solid black;
-    text-align: center;
-  }
+.container-global {
+  display: flex;
+  padding: 5px;
+}
+
+.container-global>* {
+  margin: 0 10px;
+  flex: 1;
+}
+
+.card-global {
+  padding: 5px;
+  border-radius: 5px;
+  border: 1px solid black;
+  text-align: center;
+}

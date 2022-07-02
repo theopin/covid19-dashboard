@@ -21,16 +21,16 @@ class GlobalStats extends Component {
   render() {
 
     return (
-      <div class="container">
-        <div class="card">
+      <div className="container-global">
+        <div className="card-global">
           <div>Total Cases</div>
           <div>{this.state.globalCases.cases}</div>
         </div>
-        <div class="card">
+        <div className="card-global">
           <div>Total Deaths</div>
           <div>{this.state.globalCases.deaths}</div>
         </div>
-        <div class="card">
+        <div className="card-global">
           <div>Total Vaccines Administered</div>
           <div>{this.state.globalVaccinations}</div>
         </div>

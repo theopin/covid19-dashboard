@@ -25,7 +25,7 @@ class CountryTally extends Component {
         return (
           <tr>
             <td>
-              <img class="flag" src={country.countryInfo.flag}/>
+              <img className="flag" src={country.countryInfo.flag}/>
             </td>
             
             <td>{country.country}</td>
@@ -36,7 +36,8 @@ class CountryTally extends Component {
     }
 
     return (
-      <div class="card" >
+      <div className="container-table">
+        <div>Hi</div>
         <table>
           <CountryTallyRows countries={this.state.countryTally} />
         </table>

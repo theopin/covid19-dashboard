@@ -1,7 +1,5 @@
-.card {
+.container-table {
     padding: 10px;
-    border-radius: 5px;
-    border: 1px solid black;
     text-align: center; 
     overflow: auto;
 }
