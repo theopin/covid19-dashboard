@@ -76,9 +76,11 @@ class CountryTally extends Component {
 
     return (
       <div className='container-country'>
-        <input contentEditable="true" className="search-bar" placeholder="Search Country" onChange={this.handleChange} />
+        <div className='search-bar'>
+        <input contentEditable="true" className="search-bar-text" placeholder="Search Country" onChange={this.handleChange} />
+        </div>
         <div className='container-table'>
-          <table>
+          <table cellSpacing={0}>
             <tbody>
               <CountryTallyRows countries={this.state.countryTally} />
             </tbody>
