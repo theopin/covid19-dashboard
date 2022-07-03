@@ -1,48 +1,72 @@
 import React, { Component } from 'react';
-import './CountryTally.css'
 import axios from 'axios'
+import Fuse from 'fuse.js'
 
+import './CountryTally.css'
 
-async function getData(countryString) {
-  if (countryString == "")
-    return await axios.get('https://disease.sh/v3/covid-19/countries?sort=cases')
-  return await axios.get('https://disease.sh/v3/covid-19/countries/' + countryString + '?yesterday')
-}
+const options = {
+  // isCaseSensitive: false,
+  // includeScore: false,
+  // shouldSort: true,
+  // includeMatches: false,
+  // findAllMatches: false,
+  // minMatchCharLength: 1,
+  // location: 0,
+  // threshold: 0.6,
+  // distance: 100,
+  // useExtendedSearch: false,
+  // ignoreLocation: false,
+  // ignoreFieldNorm: false,
+  // fieldNormWeight: 1,
+  keys: [
+    "country",
+    "countryInfo.iso3"
+  ]
+};
 
 class CountryTally extends Component {
   constructor(props) {
     super(props);
-    this.state = { countryTally: [], countrySearch: "" };
+    this.state = { countryTally: [] };
     this.handleChange = this.handleChange.bind(this);
   }
 
   async componentDidMount() {
-    const countryTally = await getData("")
+    const countryTally = await axios.get('https://disease.sh/v3/covid-19/countries?sort=cases')
 
     this.setState({
       countryTally: countryTally.data,
     });
   }
 
-  async handleChange(event) {    
-    const countryTally = await getData(event.target.value)
-    console.log(countryTally.data)
-    this.setState({
-      countryTally: countryTally.data,
-    });  
+  async handleChange(event) {
+    console.log(event.target.value != "")
+    const countryTally = await axios.get('https://disease.sh/v3/covid-19/countries?sort=cases')
+    if (event.target.value != "") {
+      const fuse = new Fuse(countryTally.data, options);
+      this.setState({
+        countryTally: fuse.search(event.target.value).map(a => a.item),
+      });
+    }
+    else
+      this.setState({
+        countryTally: countryTally.data,
+      });
+
+
   }
 
   render() {
-    
+
     const CountryTallyRows = ({ countries }) => {
       return countries.map(country => {
         if (!country.countryInfo._id) return null
         return (
           <tr key={country.countryInfo._id}>
             <td>
-              <img className="flag" src={country.countryInfo.flag} alt={country.countryInfo.iso3}/>
+              <img className="flag" src={country.countryInfo.flag} alt={country.countryInfo.iso3} />
             </td>
-            
+
             <td>{country.country}</td>
             <td>{country.cases}</td>
           </tr>
@@ -52,14 +76,14 @@ class CountryTally extends Component {
 
     return (
       <div className='container-country'>
-        <input contentEditable="true" className="search-bar" placeholder="Search Country" onChange={this.handleChange}/>
+        <input contentEditable="true" className="search-bar" placeholder="Search Country" onChange={this.handleChange} />
         <div className='container-table'>
-        <table>
-          <tbody>
-            <CountryTallyRows countries={this.state.countryTally} />
-          </tbody>
-          
-        </table>
+          <table>
+            <tbody>
+              <CountryTallyRows countries={this.state.countryTally} />
+            </tbody>
+
+          </table>
         </div>
       </div>
     );
