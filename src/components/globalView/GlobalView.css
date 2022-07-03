@@ -14,3 +14,8 @@
   border: 1px solid black;
   text-align: center;
 }
+
+.container-map {
+  display: flex;
+  flex-direction: column;
+}

@@ -1,7 +1,9 @@
 .container-country {
     display: flex;
     flex-direction: column;
+    max-width: 300px;
 }
+
 .search-bar {
     display: flex;
     flex-direction: column;

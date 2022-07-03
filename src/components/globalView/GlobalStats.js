@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import './GlobalView.css'
 import axios from 'axios'
+import './GlobalView.css'
 
 
 class GlobalStats extends Component {
