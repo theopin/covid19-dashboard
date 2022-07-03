@@ -34,13 +34,15 @@ class MapData extends Component {
       })
     }
     return (
-      <MapContainer center={[0, 0]} zoom={3} scrollWheelZoom={true}>
+      <div style={{display: 'flex', 'flex-direction': 'column',}}>
+      <MapContainer center={[0, 0]} zoom={3} scrollWheelZoom={true} style={{height: '100%'}}>
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
         <CountryMarkers countries={this.state.countriesData} />
       </MapContainer>
+      </div>
     );
   }
 }
