@@ -1,27 +1,37 @@
 name: Build and Deploy to Netlify
 
+#on:
+#  pull_request:
+#    branches: 
+#      - main
+#    types: 
+#      - closed
+# For testing
 on:
   pull_request:
-    branches: 
-      - main
-    types: 
-      - closed
-    
+    branches: [ "main" ]
+
 jobs:
   build:
     runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v2
-
-      # ( Build to ./dist or other directory... )
-
+      - name: Use Node.js 12.x
+        uses: actions/setup-node@v3
+        with:
+          node-version: 12.x
+          cache: 'npm'
+      - run: npm ci
+      - run: npm run build 
+      
       - name: Deploy to Netlify
         uses: nwtgck/actions-netlify@v1.2
         with:
-          publish-dir: './dist'
+          publish-dir: './build'
           production-branch: master
           github-token: ${{ secrets.GITHUB_TOKEN }}
           deploy-message: "Deploy from GitHub Actions"
+          alias: undefined
           enable-pull-request-comment: false
           enable-commit-comment: true
           overwrites-pull-request-comment: true
