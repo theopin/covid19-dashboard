@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
 import axios from 'axios'
+import './GlobalView.css'
+
 
 
 class MapData extends Component {
@@ -34,13 +36,15 @@ class MapData extends Component {
       })
     }
     return (
-      <MapContainer center={[0, 0]} zoom={3} scrollWheelZoom={true}>
+      <div className='container-map'>
+      <MapContainer center={[0, 0]} zoom={3} scrollWheelZoom={true} style={{'flex-grow': '1',}}>
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
         <CountryMarkers countries={this.state.countriesData} />
       </MapContainer>
+      </div>
     );
   }
 }

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import './GlobalView.css'
 import axios from 'axios'
+import './GlobalView.css'
 
 
 class GlobalStats extends Component {
@@ -12,8 +12,6 @@ class GlobalStats extends Component {
   async componentDidMount() {
     const globalCases = await axios.get('https://disease.sh/v3/covid-19/all')
     const globalVaccinations = await axios.get('https://disease.sh/v3/covid-19/vaccine/coverage?lastdays=1&fullData=false')
-    console.log(globalCases) 
-    console.log(globalVaccinations) 
     this.setState({
       globalCases: globalCases.data,
       globalVaccinations: Object.values(globalVaccinations.data)[0]
@@ -23,16 +21,16 @@ class GlobalStats extends Component {
   render() {
 
     return (
-      <div class="container">
-        <div class="card">
+      <div className="container-global">
+        <div className="card-global">
           <div>Total Cases</div>
           <div>{this.state.globalCases.cases}</div>
         </div>
-        <div class="card">
+        <div className="card-global">
           <div>Total Deaths</div>
           <div>{this.state.globalCases.deaths}</div>
         </div>
-        <div class="card">
+        <div className="card-global">
           <div>Total Vaccines Administered</div>
           <div>{this.state.globalVaccinations}</div>
         </div>

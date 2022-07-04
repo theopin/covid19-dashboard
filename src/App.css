@@ -1,8 +1,17 @@
 .leaflet-container {
-  height: 300px;
   border-radius: 5px;
-  margin: 14px;
   border: 1px solid black;
+}
+
+.container {
+  display: flex;
+  padding: 5px;
+  height: 300px;
+}
+
+.container>* {
+  margin: 0 10px;
+  flex: 1;
 }
 
 body {
