@@ -97,5 +97,7 @@ tr:hover {
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
+    border-left: 7px solid white;
+    border-right: 7px solid white;
     background: #555;
 }
