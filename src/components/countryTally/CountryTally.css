@@ -77,18 +77,21 @@ tr:hover {
 
 /* width */
 ::-webkit-scrollbar {
-    width: 10px;
+    width: 20px;
 }
 
 /* Track */
 ::-webkit-scrollbar-track {
-    border-top-right-radius: 1px;
-    border-bottom-right-radius: 1px;
+    border-radius: 5px;
+    border-left: 9px solid white;
+    border-right: 9px solid white;
     background: #f1f1f1;
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
+    border-left: 7px solid white;
+    border-right: 7px solid white;
     background: #888;
 }
 
