@@ -11,7 +11,7 @@ const fuzzySearchOptions = {
   ]
 };
 
-const statisticsTags = ['Confirmed', 'Active', 'Dead', 'Recovered']
+const statisticsTags = ['cases', 'active', 'deaths', 'recovered']
 
 class CountryTally extends Component {
   constructor(props) {
@@ -32,7 +32,7 @@ class CountryTally extends Component {
 
   async handleChangeQuery(event) {
     console.log(event.target.value !== "")
-    const countryTally = await axios.get('https://disease.sh/v3/covid-19/countries?sort=cases')
+    const countryTally = await axios.get('https://disease.sh/v3/covid-19/countries?sort=' + this.state.countrySelectedStat)
     if (event.target.value !== "") {
       const fuse = new Fuse(countryTally.data, fuzzySearchOptions);
       this.setState({
@@ -46,7 +46,10 @@ class CountryTally extends Component {
   }
 
   async handleChangeStatistic(event) {
+    console.log('https://disease.sh/v3/covid-19/countries?sort=' + statisticsTags[event.target.id])
+    const countryTally = await axios.get('https://disease.sh/v3/covid-19/countries?sort=' + statisticsTags[event.target.id])
     this.setState({
+      countryTally: countryTally.data,
       countrySelectedStat: statisticsTags[event.target.id],
     });
   }
@@ -63,7 +66,7 @@ class CountryTally extends Component {
             </td>
 
             <td>{country.country}</td>
-            <td>{country.cases}</td>
+            <td>{country[this.state.countrySelectedStat]}</td>
           </tr>
         )
       })
@@ -80,7 +83,7 @@ class CountryTally extends Component {
             'color': this.state.countrySelectedStat === element ? 'white' : 'black'
           }} 
           onClick={this.handleChangeStatistic}>
-            {element}
+            {element.charAt(0).toUpperCase() + element.slice(1)} 
             </button>
         )
       });
