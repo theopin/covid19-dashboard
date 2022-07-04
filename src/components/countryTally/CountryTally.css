@@ -3,6 +3,22 @@
     flex-direction: column;
     max-width: 300px;
 }
+.sorting-row {
+    display: flex;
+    float: left;
+    margin-bottom: 10px;
+}
+
+.sorting-chip {
+    cursor: pointer;
+    border-radius: 25px;
+    margin-right: 5px;
+    text-align: center;
+    font-size: 12px;
+    border: 1px solid black;
+    background-color: #f1f1f1;
+  }
+
 
 .search-bar {
     display: flex;

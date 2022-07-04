@@ -4,31 +4,21 @@ import Fuse from 'fuse.js'
 
 import './CountryTally.css'
 
-const options = {
-  // isCaseSensitive: false,
-  // includeScore: false,
-  // shouldSort: true,
-  // includeMatches: false,
-  // findAllMatches: false,
-  // minMatchCharLength: 1,
-  // location: 0,
-  // threshold: 0.6,
-  // distance: 100,
-  // useExtendedSearch: false,
-  // ignoreLocation: false,
-  // ignoreFieldNorm: false,
-  // fieldNormWeight: 1,
+const fuzzySearchOptions = {
   keys: [
     "country",
     "countryInfo.iso3"
   ]
 };
 
+const statisticsTags = ['Confirmed', 'Active', 'Dead', 'Recovered']
+
 class CountryTally extends Component {
   constructor(props) {
     super(props);
     this.state = { countryTally: [] };
-    this.handleChange = this.handleChange.bind(this);
+    this.handleChangeQuery = this.handleChangeQuery.bind(this);
+    this.handleChangeStatistic = this.handleChangeStatistic.bind(this);
   }
 
   async componentDidMount() {
@@ -36,14 +26,15 @@ class CountryTally extends Component {
 
     this.setState({
       countryTally: countryTally.data,
+      countrySelectedStat: statisticsTags[0]
     });
   }
 
-  async handleChange(event) {
+  async handleChangeQuery(event) {
     console.log(event.target.value !== "")
     const countryTally = await axios.get('https://disease.sh/v3/covid-19/countries?sort=cases')
     if (event.target.value !== "") {
-      const fuse = new Fuse(countryTally.data, options);
+      const fuse = new Fuse(countryTally.data, fuzzySearchOptions);
       this.setState({
         countryTally: fuse.search(event.target.value).map(a => a.item),
       });
@@ -52,8 +43,12 @@ class CountryTally extends Component {
       this.setState({
         countryTally: countryTally.data,
       });
+  }
 
-
+  async handleChangeStatistic(event) {
+    this.setState({
+      countrySelectedStat: statisticsTags[event.target.id],
+    });
   }
 
   render() {
@@ -62,7 +57,7 @@ class CountryTally extends Component {
       return countries.map(country => {
         if (!country.countryInfo._id) return null
         return (
-          <tr key={country.countryInfo._id}>
+          <tr id={country.countryInfo._id}>
             <td>
               <img className="flag" src={country.countryInfo.flag} alt={country.countryInfo.iso3} />
             </td>
@@ -74,10 +69,31 @@ class CountryTally extends Component {
       })
     }
 
+
+    const CountryStatTags = () => {
+      return statisticsTags.map((element, index) => {
+        return (
+          <button className='sorting-chip' 
+          id={index}
+          style={{ 
+            'background-color': this.state.countrySelectedStat === element ? 'black' : 'white',
+            'color': this.state.countrySelectedStat === element ? 'white' : 'black'
+          }} 
+          onClick={this.handleChangeStatistic}>
+            {element}
+            </button>
+        )
+      });
+    }
+
     return (
       <div className='container-country'>
+        <div className='sorting-row'>
+          <CountryStatTags />
+        </div>
+
         <div className='search-bar'>
-          <input contentEditable="true" className="search-bar-text" placeholder="Search Country" onChange={this.handleChange} />
+          <input contentEditable="true" className="search-bar-text" placeholder="Search Country" onChange={this.handleChangeQuery} />
         </div>
         <div className='container-table'>
           <table cellSpacing={0}>
