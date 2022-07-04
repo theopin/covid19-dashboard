@@ -11,10 +11,8 @@ class GlobalStats extends Component {
 
   async componentDidMount() {
     const globalCases = await axios.get('https://disease.sh/v3/covid-19/all')
-    const globalVaccinations = await axios.get('https://disease.sh/v3/covid-19/vaccine/coverage?lastdays=1&fullData=false')
     this.setState({
       globalCases: globalCases.data,
-      globalVaccinations: Object.values(globalVaccinations.data)[0]
     });
   }
 
@@ -31,8 +29,8 @@ class GlobalStats extends Component {
           <div>{this.state.globalCases.deaths}</div>
         </div>
         <div className="card-global">
-          <div>Total Vaccines Administered</div>
-          <div>{this.state.globalVaccinations}</div>
+          <div>Total Recovered</div>
+          <div>{this.state.globalCases.recovered}</div>
         </div>
       </div>
     );
