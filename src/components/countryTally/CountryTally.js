@@ -40,9 +40,9 @@ class CountryTally extends Component {
   }
 
   async handleChange(event) {
-    console.log(event.target.value != "")
+    console.log(event.target.value !== "")
     const countryTally = await axios.get('https://disease.sh/v3/covid-19/countries?sort=cases')
-    if (event.target.value != "") {
+    if (event.target.value !== "") {
       const fuse = new Fuse(countryTally.data, options);
       this.setState({
         countryTally: fuse.search(event.target.value).map(a => a.item),
