@@ -30,7 +30,6 @@ class CountryTally extends Component {
   }
 
   async handleChangeQuery(event) {
-    console.log(event.target.value !== "")
     const countryTally = await axios.get('https://disease.sh/v3/covid-19/countries?sort=' + this.state.countrySelectedStat)
     
     if (event.target.value !== "") {
