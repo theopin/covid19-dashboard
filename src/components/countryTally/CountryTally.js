@@ -21,23 +21,28 @@ class CountryTally extends Component {
     this.handleChangeStatistic = this.handleChangeStatistic.bind(this);
   }
 
+  obtainPercentageChange(newStat, previousDayStat, country) {
+    console.log(newStat, previousDayStat, country)
+    return +((newStat - previousDayStat) / previousDayStat * 100).toFixed(2)
+  }
+
   async componentDidMount() {
     const countryTally = await axios.get('https://disease.sh/v3/covid-19/countries?sort=cases')
 
     this.setState({
       countryTally: countryTally.data,
-      countrySelectedStat: statisticsTags[0]
     });
   }
 
   async handleChangeQuery(event) {
     console.log(event.target.value !== "")
     const countryTally = await axios.get('https://disease.sh/v3/covid-19/countries?sort=' + this.state.countrySelectedStat)
+    
     if (event.target.value !== "") {
       const fuse = new Fuse(countryTally.data, fuzzySearchOptions);
       this.setState({
         countryTally: fuse.search(event.target.value).map(a => a.item),
-      });
+        });
     }
     else
       this.setState({
@@ -46,18 +51,16 @@ class CountryTally extends Component {
   }
 
   async handleChangeStatistic(event) {
-    console.log('https://disease.sh/v3/covid-19/countries?sort=' + statisticsTags[event.target.id])
     const countryTally = await axios.get('https://disease.sh/v3/covid-19/countries?sort=' + statisticsTags[event.target.id])
     this.setState({
-      countryTally: countryTally.data,
-      countrySelectedStat: statisticsTags[event.target.id],
+      countryTally: countryTally.data
     });
   }
 
   render() {
 
     const CountryTallyRows = ({ countries }) => {
-      return countries.map(country => {
+      return countries.map((country, index) => {
         if (!country.countryInfo._id) return null
         return (
           <tr id={country.countryInfo._id}>
@@ -67,7 +70,7 @@ class CountryTally extends Component {
 
             <td>{country.country}</td>
             <td>{country[this.state.countrySelectedStat]}</td>
-          </tr>
+           </tr>
         )
       })
     }
