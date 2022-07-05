@@ -11,6 +11,14 @@ jobs:
   build:
     runs-on: ubuntu-18.04
     steps:      
+      - uses: actions/checkout@v2
+      - name: Use Node.js 12.x
+        uses: actions/setup-node@v3
+        with:
+          node-version: 12.x
+          cache: 'npm'
+      - run: npm ci
+      - run: npm run build 
       - name: Deploy to Netlify
         uses: jsmrcaga/action-netlify-deploy@v1.1.0
         with:
