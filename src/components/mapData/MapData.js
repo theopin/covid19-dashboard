@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
 import axios from 'axios'
-import './GlobalView.css'
+import './MapData.css'
 
 
 

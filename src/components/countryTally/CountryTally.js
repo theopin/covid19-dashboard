@@ -16,14 +16,9 @@ const statisticsTags = ['cases', 'active', 'deaths', 'recovered']
 class CountryTally extends Component {
   constructor(props) {
     super(props);
-    this.state = { countryTally: [] };
+    this.state = { countryTally: [], countrySelectedStat: statisticsTags[0]};
     this.handleChangeQuery = this.handleChangeQuery.bind(this);
     this.handleChangeStatistic = this.handleChangeStatistic.bind(this);
-  }
-
-  obtainPercentageChange(newStat, previousDayStat, country) {
-    console.log(newStat, previousDayStat, country)
-    return +((newStat - previousDayStat) / previousDayStat * 100).toFixed(2)
   }
 
   async componentDidMount() {
@@ -53,7 +48,8 @@ class CountryTally extends Component {
   async handleChangeStatistic(event) {
     const countryTally = await axios.get('https://disease.sh/v3/covid-19/countries?sort=' + statisticsTags[event.target.id])
     this.setState({
-      countryTally: countryTally.data
+      countryTally: countryTally.data,
+      countrySelectedStat: statisticsTags[event.target.id]
     });
   }
 
@@ -85,6 +81,7 @@ class CountryTally extends Component {
             'background-color': this.state.countrySelectedStat === element ? 'black' : 'white',
             'color': this.state.countrySelectedStat === element ? 'white' : 'black'
           }} 
+          disabled={this.state.countrySelectedStat === element}
           onClick={this.handleChangeStatistic}>
             {element.charAt(0).toUpperCase() + element.slice(1)} 
             </button>
