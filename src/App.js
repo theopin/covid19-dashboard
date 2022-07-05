@@ -1,6 +1,6 @@
 
-import GlobalStats from './components/globalView/GlobalStats';
-import MapData from './components/globalView/MapData';
+import GlobalStats from './components/globalStats/GlobalStats';
+import MapData from './components/mapData/MapData';
 import CountryTally from './components/countryTally/CountryTally';
 import './App.css';
 
